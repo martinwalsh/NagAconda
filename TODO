@@ -8,3 +8,12 @@
   - etc.
 * Add class for Database-enabled scripts
   - As with network script, reserve database-related parameters.
+
+* Include wanring and critical flags by default, don't require enable_status. 
+* Include a get method for grabbing http resources (Requests library a good fit)
+* Decouple performance metrics from threshold checking (maintain backwards compatibility)
+* Don't require start and finish calls, make them noops for backwards compatibility
+  - Run option parser on demand
+  - Register an atexit callback to produce output and exit cleanly (even after an exception)
+* Remove the optparser magic, the parser should be a simple wrapper (but maintain back-compat)
+* Add timeouts congruent with nagios plugin developer guidelines (SIGALRM and socket.setdefaulttimeout)
