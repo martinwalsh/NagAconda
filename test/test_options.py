@@ -22,16 +22,21 @@ class TestOptions(PlugTest):
         Test that required options are actually required.
 
         """
+        # fixup testrunner output
+        _stderr = sys.stderr
+        sys.stderr = sys.stdout
+
         self.plugin.add_option("t", "test", "Test required parameter",
             required=True)
 
         try:
             self.plugin.start()
         except SystemExit, e:
-            print dir(e)
-            assert True
+            assert e.code == 2
         else:
             assert False
+        finally:
+            sys.stderr = _stderr
 
     def test_parameter(self):
         """
